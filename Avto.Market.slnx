@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Avto.Market.BAL/Avto.Market.DAL.csproj" />
+  <Project Path="Avto.Market.BLL/Avto.Market.BLL.csproj" />
+  <Project Path="Avto.Market.Domain/Avto.Market.Domain.csproj" />
+  <Project Path="Avto.Market.Shared/Avto.Market.Shared.csproj" />
+  <Project Path="Avto.Market/Avto.Market.csproj" />
+</Solution>
