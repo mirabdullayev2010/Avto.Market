@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Avto.Market.Shared.DTOs.Car.CarForResultDto>
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold"><i class="bi bi-speedometer2"></i> Admin Panel</h2>
+        <a href="/Admin/Create" class="btn btn-dark rounded-pill px-4">+ Qo'shish</a>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th class="ps-4">Rasm</th>
+                    <th>Brend</th>
+                    <th>Yili</th>
+                    <th>Narxi</th>
+                    <th class="text-end pe-4">Amallar</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (var car in Model)
+                    {
+                        <tr>
+                            <td class="ps-4">
+                                <img src="@car.ImagePath" class="rounded" style="width: 70px; height: 45px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/70x45?text=No+Img'">
+                            </td>
+                            <td class="fw-bold">@car.Brend</td>
+                            <td>@car.Year</td>
+                            <td class="text-success fw-bold">$@car.Price.ToString("N0")</td>
+                            <td class="text-end pe-4">
+                                <button class="btn btn-sm btn-outline-primary border-0"><i class="bi bi-pencil"></i></button>
+                                <form asp-action="Delete" asp-route-id="@car.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger border-0"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="5" class="text-center py-5 text-muted">Hozircha mashina mavjud emas</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

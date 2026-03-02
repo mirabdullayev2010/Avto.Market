@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Avto.Market.Shared.DTOs.Car.CarForResultDto>
+
+@{
+    ViewData["Title"] = "Avtomobillar";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between mb-4">
+        <h2>Avtomobillar</h2>
+        <a asp-action="Create" class="btn btn-primary">Yangi e'lon</a>
+    </div>
+
+    <div class="row">
+        @foreach (var car in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="@car.ImagePath" class="card-img-top" style="height:200px; object-fit:cover;" />
+                    <div class="card-body">
+                        <h5>@car.Brend</h5>
+                        <p>Yili: @car.Year</p>
+                        <p class="fw-bold text-success">$@car.Price</p>
+
+                        <a asp-action="Details" asp-route-id="@car.Id" class="btn btn-dark btn-sm">Details</a>
+                        <a asp-action="Edit" asp-route-id="@car.Id" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@car.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

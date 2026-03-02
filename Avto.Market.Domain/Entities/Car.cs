@@ -7,6 +7,9 @@ namespace Auto.Market.Models;
 [Table("cars")]
 public class Car
 {
+    [Column("image_path")]
+    public required string ImagePath { get; set; }
+
     [Column("id"), Key]
     public long Id { get; set; }
 

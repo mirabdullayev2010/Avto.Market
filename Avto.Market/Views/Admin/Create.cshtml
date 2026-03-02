@@ -1,0 +1,89 @@
+﻿@model Avto.Market.Shared.DTOs.Car.CarForCreateDto
+@{ 
+    ViewData["Title"] = "Yangi e'lon"; 
+}
+
+<style>
+    :root { --gold: #d4af37; --dark: #1a1a1a; }
+    body { background: #f0f2f5; font-family: 'Poppins', sans-serif; }
+    .glass-card { 
+        background: white; border-radius: 30px; border: none;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+    }
+    .form-control { 
+        border-radius: 12px; border: 2px solid #eee; padding: 12px;
+        transition: 0.3s;
+    }
+    .form-control:focus { 
+        border-color: var(--gold); box-shadow: none; 
+    }
+    .btn-save { 
+        background: var(--dark); color: white; border-radius: 15px; 
+        padding: 15px; font-weight: bold; transition: 0.4s; border: none;
+    }
+    .btn-save:hover { background: var(--gold); transform: translateY(-3px); color: white; }
+    .form-label-custom { font-weight: bold; margin-bottom: 8px; display: block; }
+</style>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+            <div class="card glass-card p-5">
+                <h2 class="text-center fw-bold mb-4">YANGI <span style="color: var(--gold);">E'LON</span></h2>
+                
+                @* MUHIM: enctype="multipart/form-data" rasm yuklash uchun shart! *@
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
+                    
+                    <div class="mb-3">
+                        <label class="form-label-custom">Mashina Brandi</label>
+                        <input asp-for="Brend" class="form-control" placeholder="Masalan: Mercedes-Benz" required />
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <label class="form-label-custom">Ishlab chiqarilgan yili</label>
+                            <input asp-for="Year" type="number" class="form-control" placeholder="2024" required />
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label-custom">Narxi ($)</label>
+                            <input asp-for="Price" type="number" class="form-control" placeholder="Narxni kiriting" required />
+                        </div>
+                    </div>
+
+                    @* Kategoriya tanlash (Vizual usul) *@
+                    <div class="mb-3">
+                        <label class="form-label-custom text-success">Kategoriyani tanlang</label>
+                        <select asp-for="CategoryId" class="form-control">
+                            <option value="1">Yengil avtomobillar</option>
+                            <option value="2">Yuk mashinalari</option>
+                            <option value="3">Elektromobillar</option>
+                        </select>
+                        <small class="text-muted">Eslatma: Bazada ushbu IDli kategoriya bo'lishi shart.</small>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label-custom text-primary">Rasm yuklash yoki URL kiriting</label>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <div class="file-upload-wrapper bg-light rounded p-2 border">
+                                    <input type="file" name="ImageFile" class="form-control form-control-sm border-0 bg-transparent" accept="image/*" />
+                                    <small class="text-muted d-block mt-1">Kompyuterdan tanlash</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <input asp-for="ImagePath" class="form-control" placeholder="Yoki rasm URL manzilini kiriting..." />
+                                <small class="text-muted">Internetdan havola (ixtiyoriy)</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-save w-100 shadow">SAQLASH VA E'LON QILISH</button>
+                    
+                    <div class="text-center mt-3">
+                        <a href="/Admin/Index" class="text-muted text-decoration-none small">← Admin panelga qaytish</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
