@@ -1,51 +1,157 @@
 ﻿@model IEnumerable<Avto.Market.Shared.DTOs.Car.CarForResultDto>
 
+@{
+    ViewData["Title"] = "Premium Avto Galereya";
+}
+
 <style>
-    .hero-glass {
-        background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2070');
-        background-size: cover; height: 450px; border-radius: 35px;
-        display: flex; align-items: center; justify-content: center; color: white;
+    /* Butun sahifa uchun quyuq fon va premium shrift */
+    body {
+        background-color: #0a0a0a; /* Chuqur qora fon */
+        color: #e0e0e0;
+        font-family: 'Poppins', sans-serif; /* Zamonaviy va o'qishli shrift */
     }
-    .car-card { 
-        border-radius: 20px; border: none; transition: 0.4s; background: #fff; 
+
+    /* Asosiy Banner - To'liq ekran balandligida */
+    .hero-v2 {
+        position: relative;
+        height: 100vh; /* To'liq ekran balandligi */
+        background: linear-gradient(180deg, rgba(10,10,10,0) 0%, rgba(10,10,10,1) 100%), url('https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=2070') no-repeat center center;
+        background-size: cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    .car-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-    .price-tag { 
-        background: #d4af37; color: black; font-weight: bold; 
-        padding: 4px 12px; border-radius: 50px; position: absolute; bottom: 15px; right: 15px;
+
+    /* Bannerdagi asosiy matn - Oltin va oq rang uyg'unligi */
+    .hero-v2-title {
+        font-size: 5rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+        line-height: 0.9;
+        margin-bottom: 20px;
     }
+
+        .hero-v2-title span {
+            color: #d4af37; /* Oltin rang */
+            display: block;
+        }
+
+    /* Minimalist katalog tugmasi */
+    .btn-gold-outline {
+        border: 2px solid #d4af37;
+        color: #d4af37;
+        background: transparent;
+        border-radius: 0; /* Burchakli dizayn */
+        padding: 15px 40px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.4s;
+    }
+
+        .btn-gold-outline:hover {
+            background: #d4af37;
+            color: #0a0a0a;
+        }
+
+    /* Avtomobillar panjarasi foni - Qorong'u gradient */
+    .inventory-section {
+        background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+        padding: 100px 0;
+    }
+
+    /* Mashina kartochkalari - Neon effekti va quyuq fon */
+    .car-card-v2 {
+        background: #151515;
+        border: 1px solid #252525;
+        border-radius: 0; /* Burchakli dizayn */
+        overflow: hidden;
+        transition: 0.5s;
+    }
+
+        .car-card-v2:hover {
+            transform: translateY(-10px);
+            border-color: #d4af37; /* Oltin hoshiya neon effekti */
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+        }
+
+    .card-img-v2 {
+        height: 250px;
+        object-fit: cover;
+        filter: grayscale(30%); /* Biroz kulrang effekt */
+        transition: 0.5s;
+    }
+
+    .car-card-v2:hover .card-img-v2 {
+        filter: grayscale(0%); /* Hoverda to'liq rangli */
+    }
+
+    /* Kartochka ichidagi narx va ma'lumotlar */
+    .price-v2 {
+        color: #d4af37;
+        font-weight: 800;
+        font-size: 1.5rem;
+    }
+
+    .btn-dark-v2 {
+        background: #252525;
+        color: #fff;
+        border-radius: 0;
+        border: none;
+        padding: 12px;
+        width: 100%;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+        .btn-dark-v2:hover {
+            background: #fff;
+            color: #0a0a0a;
+        }
 </style>
 
-<div class="container pb-5">
-    <div class="d-flex justify-content-between align-items-center py-4">
-        <h3 class="fw-bold m-0">AVTO.<span style="color: #d4af37;">BARAKAT</span></h3>
-        <a href="/Admin/Index" class="btn btn-dark rounded-pill px-4 shadow-sm">Admin Panel</a>
+<div class="hero-v2">
+    <div class="text-center">
+        <h1 class="hero-v2-title">
+            EKSKLYUZIV<span>AVTO O'ZBEKISTON</span>
+        </h1>
+        <p class="lead text-white-50 mb-5">Mukammallikni his eting - faqat eng sara modellar.</p>
+        <a href="#inventory" class="btn btn-gold-outline">Katalogni kashf eting</a>
     </div>
+</div>
 
-    <div class="hero-glass shadow-lg mb-5">
-        <div class="text-center">
-            <h1 class="display-3 fw-bold mb-0">AVTO <span style="color: #d4af37;">BARAKAT</span></h1>
-            <p class="lead opacity-75">Sizning orzungizdagi sifatli avtomobillar</p>
-            <a href="#inventory" class="btn btn-outline-light rounded-pill px-5 py-2 mt-3">Katalogni ko'rish</a>
+<div id="inventory" class="inventory-section">
+    <div class="container">
+        <div class="text-center mb-5 pb-5">
+            <h2 class="display-5 fw-bold text-white text-transform-uppercase letter-spacing-2">Hozirda sotuvda</h2>
+            <div style="width: 60px; height: 3px; background: #d4af37; margin: 20px auto;"></div>
         </div>
-    </div>
 
-    <div id="inventory" class="row g-4">
-        @foreach (var car in Model)
-        {
-            <div class="col-lg-4 col-md-6">
-                <div class="card car-card shadow-sm h-100">
-                    <div class="position-relative overflow-hidden" style="border-radius: 20px 20px 0 0;">
-                        <img src="@car.ImagePath" class="card-img-top" style="height: 240px; object-fit: cover;" onerror="this.src='https://via.placeholder.com/400x250?text=Rasm+Topilmadi'">
-                        <div class="price-tag shadow">$@car.Price.ToString("N0")</div>
-                    </div>
-                    <div class="card-body p-4 text-center">
-                        <h4 class="fw-bold mb-1">@car.Brend</h4>
-                        <p class="text-muted small">@car.Year - yil • A'lo holatda</p>
-                        <a href="/Cars/Details/@car.Id" class="btn btn-outline-dark w-100 rounded-pill py-2">Batafsil ma'lumot</a>
+        <div class="row g-5">
+            @foreach (var car in Model)
+            {
+                <div class="col-xl-4 col-lg-6">
+                    <div class="card car-card-v2 h-100">
+                        <img src="@car.ImagePath" class="card-img-v2" onerror="this.src='https://via.placeholder.com/600x400/151515/d4af37?text=Rasm+Mavjud+Emas'">
+                        <div class="card-body p-4">
+                            <h3 class="card-title fw-bold text-white mb-2">@car.Brend</h3>
+                            <p class="text-white-50 small mb-4">@car.Year-yil • @car.Category</p>
+                            
+                            <div class="d-flex justify-content-between align-items-center mb-4 pt-3 border-top border-secondary">
+                                <span class="text-muted">Narxi:</span>
+                                <span class="price-v2">$@car.Price.ToString("N0")</span>
+                            </div>
+
+                            <a href="/Cars/Details/@car.Id" class="btn btn-dark-v2">
+                                Batafsil ko'rish
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
 </div>
