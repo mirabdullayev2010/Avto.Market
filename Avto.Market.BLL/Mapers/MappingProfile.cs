@@ -9,15 +9,11 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        // 1. Car mapping
         CreateMap<CarForCreateDto, Car>();
         CreateMap<CarForUpdateDto, Car>();
 
-        // MUHIM QISMI:
         CreateMap<Car, CarForResultDto>()
-            // Agar CarForResultDto ichidagi Category string bo'lsa, Name-ni olamiz
-            // Agar u CategoryForResultDto bo'lsa, .MapFrom(src => src.Category) bo'ladi
-            .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Name));
+    .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : string.Empty));
 
         // 2. Category mapping
         CreateMap<Category, CategoryForResultDto>();

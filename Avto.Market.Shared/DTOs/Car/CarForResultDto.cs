@@ -8,5 +8,5 @@ public class CarForResultDto
     public required decimal Price { get; set; }
     public long CategoryId { get; set; }
     public required string ImagePath { get; set; }
-    public CarForResultDto? Category { get; set; }
+    public string? Category { get; set; }
 }
